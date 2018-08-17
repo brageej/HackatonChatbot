@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
+using Chronic;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Connector;
 using Newtonsoft.Json;
@@ -92,6 +93,13 @@ namespace HackatonChatbot.Dialogs
         {
             var r = await result;
 
+            var p = new Chronic.Parser();
+            var time = p.Parse(r.Text);
+            if (time?.Start != null)
+                BudgetData.From = time.Start.Value;
+            else
+                BudgetData.From = DateTime.Now.AddDays(1).Date;
+
             await context.Typing();
             await context.PostAsync("When do you get back home?");
 
@@ -102,6 +110,13 @@ namespace HackatonChatbot.Dialogs
         {
             var r = await result;
 
+            var p = new Chronic.Parser();
+            var time = p.Parse(r.Text);
+            if (time?.Start != null)
+                BudgetData.To = time.Start.Value;
+            else
+                BudgetData.To = DateTime.Now.AddDays(4).Date;
+
             await context.Typing();
             await context.PostAsync("What is your budget?");
 
@@ -111,6 +126,11 @@ namespace HackatonChatbot.Dialogs
         private async Task BudgetDone(IDialogContext context, IAwaitable<IMessageActivity> result)
         {
             var r = await result;
+
+            if (string.IsNullOrWhiteSpace(r.Text))
+                BudgetData.Amount = "4000 ISK";
+            else
+                BudgetData.Amount = r.Text;
 
             var card = new HeroCard(
                 title: "Do you want me to send you updates on your spendings?",
@@ -148,11 +168,11 @@ namespace HackatonChatbot.Dialogs
             if (r.Text.ToLowerInvariant().Contains("yes"))
             {
                 await context.Typing();
-                await context.PostAsync("We will send you daily updates on your updates.");
+                await context.PostAsync("I will send you daily updates on your updates.");
             }
 
             await context.Typing();
-            await context.PostAsync("Your budget has been set up.");
+            await context.PostAsync($"Your budget for {BudgetData.Amount} has been set up from {BudgetData.From:d} to {BudgetData.To:d}.");
 
             context.Done(string.Empty);
         }
@@ -160,8 +180,7 @@ namespace HackatonChatbot.Dialogs
         private async Task ExchangeRates(IDialogContext context)
         {
             await context.Typing();
-            await context.PostAsync("In Ukraine they use Hryvnja​");
-            await context.PostAsync("100 UAH = 385,8 ISK");
+            await context.PostAsync("In Ukraine they use Hryvnja​, 100 UAH = 385,8 ISK");
 
             var card = new HeroCard(
                 title: "Can I help you with anything else?",
