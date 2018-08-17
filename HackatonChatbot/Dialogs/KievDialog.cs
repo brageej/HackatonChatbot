@@ -80,7 +80,80 @@ namespace HackatonChatbot.Dialogs
         private async Task Budget(IDialogContext context)
         {
             await context.Typing();
-            await context.PostAsync("Unfotunately our developers did not implement this feature 2...");
+            await context.PostAsync("That sounds like a good idea!");
+
+            await context.Typing();
+            await context.PostAsync("When are you leaving?");
+
+            context.Wait(DateFrom);
+        }
+
+        private async Task DateFrom(IDialogContext context, IAwaitable<IMessageActivity> result)
+        {
+            var r = await result;
+
+            await context.Typing();
+            await context.PostAsync("When do you get back home?");
+
+            context.Wait(DatesDone);
+        }
+
+        private async Task DatesDone(IDialogContext context, IAwaitable<IMessageActivity> result)
+        {
+            var r = await result;
+
+            await context.Typing();
+            await context.PostAsync("What is your budget?");
+
+            context.Wait(BudgetDone);
+        }
+
+        private async Task BudgetDone(IDialogContext context, IAwaitable<IMessageActivity> result)
+        {
+            var r = await result;
+
+            var card = new HeroCard(
+                title: "Do you want me to send you updates on your spendings?",
+                buttons: new List<CardAction>
+                {
+                    new CardAction
+                    (
+                        ActionTypes.PostBack,
+                        title: "No, thank you",
+                        value: "No, thank you"
+                    ),
+                    new CardAction
+                    (
+                        ActionTypes.PostBack,
+                        title: "Yes, please",
+                        value: "Yes, please"
+                    )
+                }
+            );
+
+            var reply = context.MakeMessage();
+            reply.AttachmentLayout = AttachmentLayoutTypes.Carousel;
+            reply.Attachments = new List<Attachment> { card.ToAttachment() };
+
+            await context.Typing();
+            await context.PostAsync(reply);
+
+            context.Wait(AfterSettingUpdates);
+        }
+
+        private async Task AfterSettingUpdates(IDialogContext context, IAwaitable<IMessageActivity> result)
+        {
+            var r = await result;
+
+            if (r.Text.ToLowerInvariant().Contains("yes"))
+            {
+                await context.Typing();
+                await context.PostAsync("We will send you daily updates on your updates.");
+            }
+
+            await context.Typing();
+            await context.PostAsync("Your budget has been set up.");
+
             context.Done(string.Empty);
         }
 
