@@ -22,33 +22,81 @@ namespace HackatonChatbot.Dialogs
                     new CardAction()
                     {
                         Type = ActionTypes.PostBack,
-                        Title = "1234 1234 1234 1234",
-                        Value = "1234 1234 1234 1234"
+                        Title = "VISA: 1234 1234 1234 1234",
+                        Value = "VISA: 1234 1234 1234 1234"
                     },
                     new CardAction()
                     {
                         Type =  ActionTypes.PostBack,
-                        Title = "1726 1234 1234 1234",
-                        Value = "1726 1234 1234 1234"
+                        Title = "Mastercard: 1726 1234 1234 1234",
+                        Value = "Mastercard: 1726 1234 1234 1234"
+                    },
+                    new CardAction()
+                    {
+                        Type =  ActionTypes.PostBack,
+                        Title = "None of those cards",
+                        Value = "None"
                     },
                 }
             };
             var reply = context.MakeMessage();
-            reply.AttachmentLayout = AttachmentLayoutTypes.Carousel;
+            reply.AttachmentLayout = AttachmentLayoutTypes.List;
             reply.Attachments = new List<Attachment> { heroCard.ToAttachment() };
 
             await context.Typing();
             await context.PostAsync(reply);
 
-            context.Wait(Resume);
+            context.Wait(ConfirmBlocking);
         }
 
-        private async Task Resume(IDialogContext context, IAwaitable<IMessageActivity> result)
+        private async Task ConfirmBlocking(IDialogContext context, IAwaitable<IMessageActivity> result)
         {
             var r = await result;
-            await context.PostAsync("Do you want me to block the card: " + r.Text + "?");
 
-            context.Wait(MessageReceivedAsync);
+            if (r.Text != "None")
+            {
+                await context.PostAsync("Do you want me to block the card: " + r.Text + "?");
+
+                var heroCard = new HeroCard()
+                {
+                    Title = "Confirm?",
+                    Buttons = new List<CardAction>
+                {
+                    new CardAction()
+                    {
+                        Type = ActionTypes.PostBack,
+                        Title = "YES",
+                        Value = "YES"
+                    },
+                    new CardAction()
+                    {
+                        Type =  ActionTypes.PostBack,
+                        Title = "NO",
+                        Value = "NO"
+                    },
+                    new CardAction()
+                    {
+                        Type =  ActionTypes.PostBack,
+                        Title = "Back",
+                        Value = "Back"
+                    },
+                }
+                };
+
+                var reply = context.MakeMessage();
+                reply.AttachmentLayout = AttachmentLayoutTypes.Carousel;
+                reply.Attachments = new List<Attachment> { heroCard.ToAttachment() };
+
+                //await context.Typing();
+                await context.PostAsync(reply);
+
+                context.Wait(MessageReceivedAsync);
+            }
+            else
+            {
+                await context.PostAsync("Your card cannot be closed using this tool.");
+                context.Done(string.Empty);
+            }
         }
 
         private async Task MessageReceivedAsync(IDialogContext context, IAwaitable<IMessageActivity> result)
@@ -56,17 +104,26 @@ namespace HackatonChatbot.Dialogs
             var message = await result;
             if (!string.IsNullOrEmpty(message.Text))
             {
-                if (message.Text.ToLower().Equals("yes"))
+                switch (message.Text.ToLower())
                 {
-                    await context.PostAsync("The card has been blocked");
-                    context.Done(string.Empty);
-                }
-                else
-                {
-                    await context.PostAsync("Ok, your card will not be blocked");
-                    context.Done(string.Empty);
+                    case "yes":
+                        await context.PostAsync("The card has been blocked. We will send you a new card right away.");
+                        context.Done(string.Empty);
+                        break;
+                    case "no" :
+                        await context.PostAsync("Ok, your card will not be blocked.");
+                        context.Done(string.Empty);
+                        break;
+                    default:
+                        //context.Wait(StartAsync);
+                        context.Done(string.Empty);
+                        break;
                 }
             }
         }
+
+
+
+
     }
 }
