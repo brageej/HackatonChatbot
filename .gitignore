@@ -6,3 +6,9 @@ packages
 HackatonChatbot/HackatonChatbot.csproj.user
 .vs
 /HackatonChatbot/HackatonChatbot.csproj.user
+BotBuilderLocation/packages
+BotBuilderLocation/bin
+BotBuilderLocation/obj
+HackatonChatbot.Data/packages
+HackatonChatbot.Data/bin
+HackatonChatbot.Data/obj

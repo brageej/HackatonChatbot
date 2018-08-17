@@ -36,6 +36,9 @@ namespace HackatonChatbot
                     .SingleInstance();
 
                 builder.RegisterType<WelcomeDialog>().InstancePerDependency();
+                builder.RegisterType<StolenCreditCardDialog>().InstancePerDependency();
+                builder.RegisterType<TransactionsDialog>().InstancePerDependency();
+                builder.RegisterType<KievDialog>().InstancePerDependency();
             });
         }
     }

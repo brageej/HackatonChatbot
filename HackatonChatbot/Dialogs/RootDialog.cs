@@ -24,20 +24,19 @@ namespace HackatonChatbot.Dialogs
             var message = activity.Text;
             if (message.ToLower().Contains("transaction"))
             {
-                throw new NotImplementedException();
+                context.Call(new TransactionsDialog(), Resume);
             }
             else if (message.ToLower().Contains("hello"))
             {
-                throw new NotImplementedException();
-
+                context.Call(new WelcomeDialog(), Resume);
             }
             else if (message.ToLower().Contains("stolen"))
             {
-                throw new NotImplementedException();
+                context.Call(new StolenCreditCardDialog(), Resume);
             }
             else if (message.ToLower().Contains("kiev"))
             {
-                throw new NotImplementedException();
+                context.Call(new KievDialog(), Resume);
             }
             else
             {
