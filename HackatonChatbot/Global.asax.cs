@@ -5,6 +5,7 @@ using Microsoft.Bot.Builder.Dialogs.Internals;
 using Autofac;
 using Microsoft.Bot.Connector;
 using System.Reflection;
+using HackatonChatbot.Dialogs;
 
 namespace HackatonChatbot
 {
@@ -33,6 +34,8 @@ namespace HackatonChatbot
                     .Keyed<IBotDataStore<BotData>>(AzureModule.Key_DataStore)
                     .AsSelf()
                     .SingleInstance();
+
+                builder.RegisterType<WelcomeDialog>().InstancePerDependency();
             });
         }
     }
