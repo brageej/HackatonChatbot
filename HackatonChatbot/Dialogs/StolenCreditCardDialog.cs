@@ -13,36 +13,40 @@ namespace HackatonChatbot.Dialogs
     {
         public async Task StartAsync(IDialogContext context)
         {
+            await context.PostAsync("I'm very sorry to hear that!");
             var heroCard = new HeroCard()
             {
                 Title = "Which card has been stolen?",
-                Buttons =
+                Buttons = new List<CardAction>
                 {
                     new CardAction()
                     {
+                        Type = ActionTypes.PostBack,
                         Title = "1234 1234 1234 1234",
                         Value = "1234 1234 1234 1234"
                     },
                     new CardAction()
                     {
+                        Type =  ActionTypes.PostBack,
                         Title = "1726 1234 1234 1234",
                         Value = "1726 1234 1234 1234"
                     },
                 }
             };
-            var attachment = heroCard.ToAttachment();
-            var options = new List<string>();
-            options.Add("Main card");
-            options.Add("Second card");
-            await context.PostAsync("I'm very sorry to hear that!");
-            var dialog = new PromptDialog.PromptChoice<string>(options, "Which card has been stolen? : ", "Sorry, that wans't a valid option", 2);
-            context.Call(dialog, Resume);
+            var reply = context.MakeMessage();
+            reply.AttachmentLayout = AttachmentLayoutTypes.Carousel;
+            reply.Attachments = new List<Attachment> { heroCard.ToAttachment() };
+
+            await context.Typing();
+            await context.PostAsync(reply);
+
+            context.Wait(Resume);
         }
 
-        private async Task Resume(IDialogContext context, IAwaitable<object> result)
+        private async Task Resume(IDialogContext context, IAwaitable<IMessageActivity> result)
         {
             var r = await result;
-            await context.PostAsync("Do you want me to block the card: " + r.ToString() + "?");
+            await context.PostAsync("Do you want me to block the card: " + r.Text + "?");
 
             context.Wait(MessageReceivedAsync);
         }
