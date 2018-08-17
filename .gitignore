@@ -3,5 +3,6 @@ HackatonChatbot/packages
 HackatonChatbot/bin
 HackatonChatbot/obj
 packages
+HackatonChatbot/HackatonChatbot.csproj.user
 .vs
 /HackatonChatbot/HackatonChatbot.csproj.user
