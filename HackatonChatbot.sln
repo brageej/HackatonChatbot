@@ -5,6 +5,10 @@ VisualStudioVersion = 15.0.27004.2006
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HackatonChatbot", "HackatonChatbot\HackatonChatbot.csproj", "{FCC6443B-F2CD-450F-872F-F5A60328239B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HackatonChatbot.Data", "HackatonChatbot.Data\HackatonChatbot.Data.csproj", "{0EC119EC-8B9D-4D4B-B0BB-456A741DB6E1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BotBuilderLocation", "BotBuilderLocation\BotBuilderLocation.csproj", "{3CC3A7F1-CB7C-4C05-86EA-70B99C113FAD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{FCC6443B-F2CD-450F-872F-F5A60328239B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FCC6443B-F2CD-450F-872F-F5A60328239B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FCC6443B-F2CD-450F-872F-F5A60328239B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0EC119EC-8B9D-4D4B-B0BB-456A741DB6E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0EC119EC-8B9D-4D4B-B0BB-456A741DB6E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0EC119EC-8B9D-4D4B-B0BB-456A741DB6E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0EC119EC-8B9D-4D4B-B0BB-456A741DB6E1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3CC3A7F1-CB7C-4C05-86EA-70B99C113FAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3CC3A7F1-CB7C-4C05-86EA-70B99C113FAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3CC3A7F1-CB7C-4C05-86EA-70B99C113FAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3CC3A7F1-CB7C-4C05-86EA-70B99C113FAD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
