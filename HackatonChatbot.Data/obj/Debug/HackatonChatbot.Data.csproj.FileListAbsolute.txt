@@ -1,0 +1,14 @@
+C:\Users\stanislav.naiko\Source\Repos\HackatonChatbot\HackatonChatbot.Data\bin\Debug\HackatonChatbot.Data.dll
+C:\Users\stanislav.naiko\Source\Repos\HackatonChatbot\HackatonChatbot.Data\bin\Debug\HackatonChatbot.Data.pdb
+C:\Users\stanislav.naiko\Source\Repos\HackatonChatbot\HackatonChatbot.Data\obj\Debug\HackatonChatbot.Data.csprojResolveAssemblyReference.cache
+C:\Users\stanislav.naiko\Source\Repos\HackatonChatbot\HackatonChatbot.Data\obj\Debug\HackatonChatbot.Data.csproj.CoreCompileInputs.cache
+C:\Users\stanislav.naiko\Source\Repos\HackatonChatbot\HackatonChatbot.Data\obj\Debug\HackatonChatbot.Data.dll
+C:\Users\stanislav.naiko\Source\Repos\HackatonChatbot\HackatonChatbot.Data\obj\Debug\HackatonChatbot.Data.pdb
+C:\Users\stanislav.naiko\Source\Repos\HackatonChatbot\HackatonChatbot.Data\bin\Debug\HackatonChatbot.Data.dll.config
+C:\Users\stanislav.naiko\Source\Repos\HackatonChatbot\HackatonChatbot.Data\bin\Debug\EntityFramework.dll
+C:\Users\stanislav.naiko\Source\Repos\HackatonChatbot\HackatonChatbot.Data\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\stanislav.naiko\Source\Repos\HackatonChatbot\HackatonChatbot.Data\bin\Debug\EntityFramework.xml
+C:\Users\stanislav.naiko\Source\Repos\HackatonChatbot\HackatonChatbot.Data\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\stanislav.naiko\Source\Repos\HackatonChatbot\HackatonChatbot.Data\obj\Debug\HackatonChatbot.Data.csproj.CopyComplete
+C:\Users\stanislav.naiko\Source\Repos\HackatonChatbot\HackatonChatbot.Data\obj\Debug\HackatonChatbot.Data.Migrations.InitialCreate.resources
+C:\Users\stanislav.naiko\Source\Repos\HackatonChatbot\HackatonChatbot.Data\obj\Debug\HackatonChatbot.Data.csproj.GenerateResource.cache
