@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Microsoft.Bot.Builder.Dialogs;
+using Microsoft.Bot.Builder.Location.Dialogs;
 using Microsoft.Bot.Connector;
 
 namespace HackatonChatbot.Dialogs
